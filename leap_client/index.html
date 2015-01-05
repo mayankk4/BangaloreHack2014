@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src="./jquery.js"></script>
+    <script src="./socket.io.js"></script>
+  </head>
+  <body>
+    <p id='result'>0</p>
+    <canvas id="canvas" width="800" height="600"></canvas>
+  </body>
+  <script type="text/javascript">
+    $(document).ready(function() {
+       // creating a new websocket
+        // var socket = io('100.96.51.165:5000');
+      var socket = io('100.96.51.165:5000', {transports: ['websocket', 'polling', 'flashsocket']});
+
+        // on every message recived we print the new datas inside the #container div
+        socket.on('fired_client', function () {
+            // convert the json string into a valid javascript object
+            console.log("shots fired!");
+            $('#result').html(parseInt($('#result').html()) + 1);
+        });
+      });
+  </script>
+</html>
